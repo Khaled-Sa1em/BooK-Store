@@ -1,0 +1,57 @@
+﻿@model BookAuthorViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>BookAuthorViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            @*@if (Model.AutherId == -1)
+            {
+                <div class="alert alert-danger">@ViewBag.Message</div>
+            }*@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Img" class="control-label"></label>
+                <input type="file" class="form-control" asp-for="Img" />
+                <span asp-validation-for="Img" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AutherId" class="control-label"></label>
+                <select asp-for="AutherId" class="form-select" asp-items="@(new SelectList(Model.Authers,"Id","FullName"))">
+                    <option value="">Choose an Auther</option>
+                </select>
+                <span asp-validation-for="AutherId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @*@{await Html.RenderPartialAsync("_Validation");}*@
+    @* to improve performance of the site
+        and don't reload every time user did something wronge'*@
+    <partial name="_Validation" />
+}
